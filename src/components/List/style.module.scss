@@ -1,0 +1,35 @@
+.List {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 8px;
+  }
+
+  .item {
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    width: 450px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 8px;
+
+    > p {
+      font-size: 24px;
+      font-weight: 800;
+    }
+  }
+}
