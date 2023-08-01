@@ -15,8 +15,13 @@ function Input() {
 
   const handleEnterForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addTodo(todoItem);
-    setTodoItem('');
+
+    if (todoItem === '') {
+      alert('내용을 입력해주세요!');
+    } else {
+      addTodo(todoItem);
+      setTodoItem('');
+    }
   };
 
   return (
