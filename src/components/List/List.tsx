@@ -7,14 +7,14 @@ const cx = bind(style);
 
 function List() {
   const { filter } = useFilterStore();
-  const { todos, checkTodos, removeTodos } = useStore();
+  const { todos, checkTodos, deleteTodos } = useStore();
 
   const handleCheckTodo = (key: number) => {
     checkTodos(key);
   };
 
   const handleRemoveTodo = (key: number) => {
-    removeTodos(key);
+    deleteTodos(key);
   };
 
   return (

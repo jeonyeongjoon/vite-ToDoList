@@ -10,7 +10,8 @@ interface ToDoState {
   todos: ToDoItem[];
   addTodos: (text: string) => void;
   checkTodos: (key: number) => void;
-  removeTodos: (key: number) => void;
+  deleteTodos: (key: number) => void;
+  allDeleteTodos: () => void;
 }
 
 interface FilterState {
@@ -34,10 +35,16 @@ export const useStore = create<ToDoState>((set) => ({
       ),
     }));
   },
-  removeTodos: (key) => {
+  deleteTodos: (key) => {
     set((state) => ({
       ...state,
       todos: state.todos.filter((todo) => todo.key !== key),
+    }));
+  },
+  allDeleteTodos: () => {
+    set((state) => ({
+      ...state,
+      todos: (state.todos = []),
     }));
   },
 }));
