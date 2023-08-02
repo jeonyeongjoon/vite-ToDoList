@@ -27,6 +27,7 @@ function MainInput() {
   return (
     <form onSubmit={handleEnterForm} className={cx(style.submitInput)}>
       <input
+        maxLength={15}
         value={todoItem}
         onChange={handleChangeInput}
         type="text"

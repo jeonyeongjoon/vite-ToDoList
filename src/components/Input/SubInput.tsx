@@ -34,6 +34,7 @@ function SubInput({ itemId, setModifyState }: Props) {
   return (
     <form onSubmit={handleEnterModifyForm}>
       <input
+        maxLength={15}
         className={cx(style.submitModiyInput)}
         value={modifyTodoItem}
         onChange={handleChageModifyInput}
