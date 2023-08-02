@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 const cx = bind(style);
 
-function Input() {
+function MainInput() {
   const [todoItem, setTodoItem] = useState<string>('');
   const addTodo = useStore((state) => state.addTodos);
 
@@ -36,4 +36,4 @@ function Input() {
   );
 }
 
-export default Input;
+export default MainInput;

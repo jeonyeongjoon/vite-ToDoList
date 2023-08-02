@@ -3,6 +3,7 @@ import bind from '../../styles/cx';
 import { useStore, useFilterStore } from '../../store';
 import DropDown from '../DropDown/DropDown';
 import { useState } from 'react';
+import SubInput from '../Input/SubInput';
 
 const cx = bind(style);
 
@@ -10,6 +11,7 @@ function List() {
   const [modifyState, setModifyState] = useState<boolean>(false);
   const { filter } = useFilterStore();
   const { todos, checkTodos, deleteTodos } = useStore();
+  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
 
   const handleCheckTodo = (key: number) => {
     checkTodos(key);
@@ -37,7 +39,14 @@ function List() {
                   >
                     <div className={cx(style.checkBox)} />
                   </div>
-                  <p>{item.text}</p>
+                  {modifyState && selectedItemId === item.key ? (
+                    <SubInput
+                      itemId={selectedItemId}
+                      setModifyState={setModifyState}
+                    />
+                  ) : (
+                    <p>{item.text}</p>
+                  )}
                 </div>
               </div>
             ))
@@ -54,9 +63,17 @@ function List() {
                 >
                   <div className={cx(style.checkBox)} />
                 </div>
-                <p>{item.text}</p>
+                {modifyState && selectedItemId === item.key ? (
+                  <SubInput
+                    itemId={selectedItemId}
+                    setModifyState={setModifyState}
+                  />
+                ) : (
+                  <p>{item.text}</p>
+                )}
               </div>
               <DropDown
+                onMenuClick={() => setSelectedItemId(item.key)}
                 onDeleteFunc={() => handleDeleteTodo(item.key)}
                 setModifyState={setModifyState}
               />

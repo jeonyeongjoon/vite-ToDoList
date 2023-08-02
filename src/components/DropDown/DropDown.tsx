@@ -6,14 +6,15 @@ import { Dispatch, SetStateAction } from 'react';
 interface Props {
   setModifyState: Dispatch<SetStateAction<boolean>>;
   onDeleteFunc: () => void;
+  onMenuClick: () => void;
 }
 
 const cx = bind(style);
 
-function DropDown({ onDeleteFunc, setModifyState }: Props) {
+function DropDown({ onDeleteFunc, setModifyState, onMenuClick }: Props) {
   return (
     <div className={cx(style.DropDownWrapper)}>
-      <img src={menuImg} alt="" />
+      <img onClick={() => onMenuClick()} src={menuImg} alt="" />
       <div className={cx(style.DropdownContent)}>
         <p onClick={() => setModifyState(true)}>수정</p>
         <p className={cx(style.deleteText)} onClick={onDeleteFunc}>
