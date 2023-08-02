@@ -12,6 +12,7 @@ interface ToDoState {
   checkTodos: (key: number) => void;
   deleteTodos: (key: number) => void;
   allDeleteTodos: () => void;
+  modifyTodos: (text: string, key: number) => void;
 }
 
 interface FilterState {
@@ -45,6 +46,14 @@ export const useStore = create<ToDoState>((set) => ({
     set((state) => ({
       ...state,
       todos: (state.todos = []),
+    }));
+  },
+  modifyTodos: (text, key) => {
+    set((state) => ({
+      ...state,
+      todos: state.todos.map((todo) =>
+        todo.key === key ? { ...todo, text: text } : todo
+      ),
     }));
   },
 }));

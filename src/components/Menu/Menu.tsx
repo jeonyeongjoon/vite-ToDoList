@@ -10,8 +10,11 @@ function Menu() {
 
   const handleAllDeleteButton = () => {
     if (todos.length > 0) {
-      alert('정말 전체 To Do를 삭제하시겠습니까?');
-      allDeleteTodos();
+      if (confirm('정말 모든 To Do를 삭제하실건가요?')) {
+        allDeleteTodos();
+      } else {
+        alert('취소하였습니다.');
+      }
     } else {
       alert('삭제할 To Do가 없습니다.');
     }
