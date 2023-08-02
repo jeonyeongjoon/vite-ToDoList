@@ -13,6 +13,11 @@ interface ToDoState {
   removeTodos: (key: number) => void;
 }
 
+interface FilterState {
+  filter: boolean;
+  selectFilter: () => void;
+}
+
 export const useStore = create<ToDoState>((set) => ({
   todos: [],
   addTodos: (text) => {
@@ -33,6 +38,16 @@ export const useStore = create<ToDoState>((set) => ({
     set((state) => ({
       ...state,
       todos: state.todos.filter((todo) => todo.key !== key),
+    }));
+  },
+}));
+
+export const useFilterStore = create<FilterState>((set) => ({
+  filter: false,
+  selectFilter: () => {
+    set((state) => ({
+      ...state,
+      filter: !state.filter,
     }));
   },
 }));

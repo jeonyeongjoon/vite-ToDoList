@@ -1,20 +1,16 @@
 import style from './style.module.scss';
 import bind from '../../styles/cx';
-import { useStore } from '../../store';
-import { useState } from 'react';
+import { useStore, useFilterStore } from '../../store';
+import Menu from '../Menu/Menu';
 
 const cx = bind(style);
 
 function List() {
-  const [filterState, setFilterState] = useState<boolean>(false);
+  const { filter } = useFilterStore();
   const { todos, checkTodos, removeTodos } = useStore();
 
   const handleCheckTodo = (key: number) => {
     checkTodos(key);
-  };
-
-  const handleFilterButton = () => {
-    setFilterState(!filterState);
   };
 
   const handleRemoveTodo = (key: number) => {
@@ -22,16 +18,10 @@ function List() {
   };
 
   return (
-    <div className={cx(style.Wrapper)}>
-      <div className={cx(style.filterContent)}>
-        <p>Completed</p>
-        <div
-          className={cx({ [style.filterButton]: filterState })}
-          onClick={handleFilterButton}
-        />
-      </div>
+    <div>
+      <Menu />
       <div className={cx(style.List)}>
-        {filterState
+        {filter
           ? todos
               .filter((item) => item.check === true)
               .map((item) => (

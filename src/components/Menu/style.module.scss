@@ -1,0 +1,35 @@
+.menuWrapper {
+  margin-top: 15px;
+  width: 490px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menuContent {
+  display: flex;
+  align-items: center;
+
+  > p {
+    font-weight: bold;
+    margin: 5px 5px 0 0;
+  }
+
+  > div {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: white;
+  }
+
+  .filterButton {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: gray;
+  }
+}
