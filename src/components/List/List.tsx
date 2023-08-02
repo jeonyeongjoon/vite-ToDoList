@@ -9,16 +9,17 @@ const cx = bind(style);
 
 function List() {
   const [modifyState, setModifyState] = useState<boolean>(false);
+
   const { filter } = useFilterStore();
   const { todos, checkTodos, deleteTodos } = useStore();
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
 
-  const handleCheckTodo = (key: number) => {
-    checkTodos(key);
+  const handleCheckTodo = (itemId: number) => {
+    checkTodos(itemId);
   };
 
-  const handleDeleteTodo = (key: number) => {
-    deleteTodos(key);
+  const handleDeleteTodo = (itemId: number) => {
+    deleteTodos(itemId);
   };
 
   return (
@@ -48,6 +49,11 @@ function List() {
                     <p>{item.text}</p>
                   )}
                 </div>
+                <DropDown
+                  onMenuClick={() => setSelectedItemId(item.key)}
+                  onDeleteFunction={() => handleDeleteTodo(item.key)}
+                  setModifyState={setModifyState}
+                />
               </div>
             ))
         : todos.map((item) => (
@@ -74,7 +80,7 @@ function List() {
               </div>
               <DropDown
                 onMenuClick={() => setSelectedItemId(item.key)}
-                onDeleteFunc={() => handleDeleteTodo(item.key)}
+                onDeleteFunction={() => handleDeleteTodo(item.key)}
                 setModifyState={setModifyState}
               />
             </div>

@@ -1,27 +1,44 @@
 import style from './style.module.scss';
 import bind from '../../styles/cx';
 import menuImg from '../../assets/menu.png';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
+import OutSideClickHandler from './OutsideClick';
 
 interface Props {
   setModifyState: Dispatch<SetStateAction<boolean>>;
-  onDeleteFunc: () => void;
+  onDeleteFunction: () => void;
   onMenuClick: () => void;
 }
 
 const cx = bind(style);
 
-function DropDown({ onDeleteFunc, setModifyState, onMenuClick }: Props) {
+function DropDown({ onDeleteFunction, setModifyState, onMenuClick }: Props) {
+  const [isFold, setIsFold] = useState<boolean>(false);
+
   return (
-    <div className={cx(style.DropDownWrapper)}>
-      <img onClick={() => onMenuClick()} src={menuImg} alt="" />
-      <div className={cx(style.DropdownContent)}>
-        <p onClick={() => setModifyState(true)}>수정</p>
-        <p className={cx(style.deleteText)} onClick={onDeleteFunc}>
-          삭제
-        </p>
+    <OutSideClickHandler onOutSideClick={() => setIsFold(false)}>
+      <div className={cx(style.DropDownWrapper)}>
+        <label onClick={() => onMenuClick()}>
+          <img onClick={() => setIsFold(!isFold)} src={menuImg} alt="" />
+        </label>
+        {isFold && (
+          <div className={cx(style.DropdownContent)}>
+            <p
+              onClick={() => setModifyState(true)}
+              className={cx(style.DropDownItem)}
+            >
+              수정
+            </p>
+            <p
+              onClick={onDeleteFunction}
+              className={cx(style.DropDownItem, style.deleteText)}
+            >
+              삭제
+            </p>
+          </div>
+        )}
       </div>
-    </div>
+    </OutSideClickHandler>
   );
 }
 
