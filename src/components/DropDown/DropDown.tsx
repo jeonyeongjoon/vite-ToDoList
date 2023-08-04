@@ -1,7 +1,8 @@
 import style from './style.module.scss';
 import bind from '../../styles/cx';
 import menuImg from '../../assets/menu.png';
-import { Dispatch, SetStateAction, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import OutSideClickHandler from './OutsideClick';
 
 interface Props {

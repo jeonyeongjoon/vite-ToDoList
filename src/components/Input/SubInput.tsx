@@ -1,7 +1,8 @@
 import style from './style.module.scss';
 import bind from '../../styles/cx';
 import { useStore } from '../../store';
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 interface Props {
   itemId: number;
