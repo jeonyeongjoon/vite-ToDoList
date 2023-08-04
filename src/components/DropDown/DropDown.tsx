@@ -26,18 +26,18 @@ function DropDown({ onDeleteTodoItem, setIsInModifyMode, onMenuClick }: Props) {
         </label>
         {isFold && (
           <div className={cx(style.DropdownContent)}>
-            <p
+            <button
               onClick={() => setIsInModifyMode(true)}
               className={cx(style.DropDownItem)}
             >
               수정
-            </p>
-            <p
+            </button>
+            <button
               onClick={onDeleteTodoItem}
               className={cx(style.DropDownItem, style.deleteText)}
             >
               삭제
-            </p>
+            </button>
           </div>
         )}
       </div>

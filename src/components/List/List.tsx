@@ -24,7 +24,7 @@ function List() {
         <div key={item.itemId} className={cx(style.item)}>
           <div
             className={cx(style.itemContent, {
-              [style.true]: item.check,
+              [style.done]: item.check,
             })}
           >
             <div

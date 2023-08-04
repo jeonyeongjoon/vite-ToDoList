@@ -10,12 +10,12 @@ interface ToDoState {
   todos: ToDoItem[];
   addTodo: (text: string) => void;
   toggleTodo: (itemId: number) => void;
-  deleteTodo: (key: number) => void;
+  deleteTodo: (itemId: number) => void;
   allDeleteTodos: () => void;
-  modifyTodo: (text: string, key: number) => void;
+  modifyTodo: (text: string, itemId: number) => void;
 }
 
-interface FilterState {
+interface ToggleFilterState {
   togglefilter: boolean;
   selectToggleFilter: () => void;
 }
@@ -58,7 +58,7 @@ export const useStore = create<ToDoState>((set) => ({
   },
 }));
 
-export const useFilterStore = create<FilterState>((set) => ({
+export const useFilterStore = create<ToggleFilterState>((set) => ({
   togglefilter: false,
   selectToggleFilter: () => {
     set((state) => ({
