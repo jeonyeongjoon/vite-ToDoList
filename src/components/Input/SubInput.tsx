@@ -12,7 +12,7 @@ const cx = bind(style);
 
 function SubInput({ itemId, setModifyState }: Props) {
   const [modifyTodoItem, setModifyTodoItem] = useState<string>('');
-  const modifyTodo = useStore((state) => state.modifyTodos);
+  const modifyTodo = useStore((state) => state.modifyTodo);
 
   const handleChageModifyInput = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -34,8 +34,7 @@ function SubInput({ itemId, setModifyState }: Props) {
   return (
     <form onSubmit={handleEnterModifyForm}>
       <input
-        maxLength={15}
-        className={cx(style.submitModiyInput)}
+        className={cx(style.submitModifyInput)}
         value={modifyTodoItem}
         onChange={handleChageModifyInput}
         type="text"

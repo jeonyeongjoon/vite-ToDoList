@@ -1,9 +1,10 @@
 .DropDownWrapper {
   position: relative;
-  width: 80px;
 
   > label {
     cursor: pointer;
+    width: 80px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;

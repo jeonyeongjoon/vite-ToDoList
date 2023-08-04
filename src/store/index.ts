@@ -1,45 +1,45 @@
 import { create } from 'zustand';
 
 interface ToDoItem {
-  key: number;
+  itemId: number;
   text: string;
   check: boolean;
 }
 
 interface ToDoState {
   todos: ToDoItem[];
-  addTodos: (text: string) => void;
-  checkTodos: (key: number) => void;
-  deleteTodos: (key: number) => void;
+  addTodo: (text: string) => void;
+  toggleTodo: (itemId: number) => void;
+  deleteTodo: (key: number) => void;
   allDeleteTodos: () => void;
-  modifyTodos: (text: string, key: number) => void;
+  modifyTodo: (text: string, key: number) => void;
 }
 
 interface FilterState {
-  filter: boolean;
-  selectFilter: () => void;
+  togglefilter: boolean;
+  selectToggleFilter: () => void;
 }
 
 export const useStore = create<ToDoState>((set) => ({
   todos: [],
-  addTodos: (text) => {
+  addTodo: (text) => {
     set((state) => ({
       ...state,
-      todos: [...state.todos, { key: Date.now(), text, check: false }],
+      todos: [...state.todos, { itemId: Date.now(), text, check: false }],
     }));
   },
-  checkTodos: (key) => {
+  toggleTodo: (itemId) => {
     set((state) => ({
       ...state,
       todos: state.todos.map((todo) =>
-        todo.key === key ? { ...todo, check: !todo.check } : todo
+        todo.itemId === itemId ? { ...todo, check: !todo.check } : todo
       ),
     }));
   },
-  deleteTodos: (key) => {
+  deleteTodo: (itemId) => {
     set((state) => ({
       ...state,
-      todos: state.todos.filter((todo) => todo.key !== key),
+      todos: state.todos.filter((todo) => todo.itemId !== itemId),
     }));
   },
   allDeleteTodos: () => {
@@ -48,22 +48,22 @@ export const useStore = create<ToDoState>((set) => ({
       todos: (state.todos = []),
     }));
   },
-  modifyTodos: (text, key) => {
+  modifyTodo: (text, itemId) => {
     set((state) => ({
       ...state,
       todos: state.todos.map((todo) =>
-        todo.key === key ? { ...todo, text: text } : todo
+        todo.itemId === itemId ? { ...todo, text: text } : todo
       ),
     }));
   },
 }));
 
 export const useFilterStore = create<FilterState>((set) => ({
-  filter: false,
-  selectFilter: () => {
+  togglefilter: false,
+  selectToggleFilter: () => {
     set((state) => ({
       ...state,
-      filter: !state.filter,
+      filter: !state.togglefilter,
     }));
   },
 }));

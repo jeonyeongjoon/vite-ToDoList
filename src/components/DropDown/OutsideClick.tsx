@@ -1,4 +1,5 @@
-import { BaseSyntheticEvent, ReactNode, useEffect, useRef } from 'react';
+import type { ReactNode } from 'react';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 interface Props {
   children: ReactNode;
@@ -10,21 +11,6 @@ function OutSideClickHandler({ children, onOutSideClick }: Props) {
     onOutSideClick();
   };
 
-  const useOutsideClick = (callback: () => void) => {
-    const ref = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-      const handleClick = (event: BaseSyntheticEvent | MouseEvent) => {
-        if (ref.current && !ref.current.contains(event.target)) {
-          callback();
-        }
-      };
-      document.addEventListener('click', handleClick);
-      return () => {
-        document.removeEventListener('click', handleClick);
-      };
-    }, [callback, ref]);
-    return ref;
-  };
   const ref = useOutsideClick(handleOutsideClick);
   return <div ref={ref}>{children}</div>;
 }

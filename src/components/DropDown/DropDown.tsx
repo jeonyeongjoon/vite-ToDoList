@@ -5,32 +5,35 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import OutSideClickHandler from './OutsideClick';
 
 interface Props {
-  setModifyState: Dispatch<SetStateAction<boolean>>;
-  onDeleteFunction: () => void;
+  setIsInModifyMode: Dispatch<SetStateAction<boolean>>;
+  onDeleteTodoItem: () => void;
   onMenuClick: () => void;
 }
 
 const cx = bind(style);
 
-function DropDown({ onDeleteFunction, setModifyState, onMenuClick }: Props) {
+function DropDown({ onDeleteTodoItem, setIsInModifyMode, onMenuClick }: Props) {
   const [isFold, setIsFold] = useState<boolean>(false);
 
   return (
     <OutSideClickHandler onOutSideClick={() => setIsFold(false)}>
-      <div className={cx(style.DropDownWrapper)}>
+      <div
+        onClick={() => setIsFold(!isFold)}
+        className={cx(style.DropDownWrapper)}
+      >
         <label onClick={() => onMenuClick()}>
-          <img onClick={() => setIsFold(!isFold)} src={menuImg} alt="" />
+          <img src={menuImg} alt="menu" />
         </label>
         {isFold && (
           <div className={cx(style.DropdownContent)}>
             <p
-              onClick={() => setModifyState(true)}
+              onClick={() => setIsInModifyMode(true)}
               className={cx(style.DropDownItem)}
             >
               수정
             </p>
             <p
-              onClick={onDeleteFunction}
+              onClick={onDeleteTodoItem}
               className={cx(style.DropDownItem, style.deleteText)}
             >
               삭제

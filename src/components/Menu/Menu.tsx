@@ -5,7 +5,7 @@ import { useFilterStore, useStore } from '../../store';
 const cx = bind(style);
 
 function Menu() {
-  const { filter, selectFilter } = useFilterStore();
+  const { togglefilter, selectToggleFilter } = useFilterStore();
   const { allDeleteTodos, todos } = useStore();
 
   const handleAllDeleteButton = () => {
@@ -20,10 +20,6 @@ function Menu() {
     }
   };
 
-  const handleFilterButton = () => {
-    selectFilter();
-  };
-
   return (
     <div className={cx(style.menuWrapper)}>
       <div className={cx(style.menuContent)}>
@@ -34,8 +30,8 @@ function Menu() {
       <div className={cx(style.menuContent)}>
         <p>Completed</p>
         <div
-          className={cx({ [style.filterButton]: filter })}
-          onClick={handleFilterButton}
+          className={cx({ [style.filterButton]: togglefilter })}
+          onClick={() => selectToggleFilter()}
         />
       </div>
     </div>

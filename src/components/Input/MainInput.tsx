@@ -7,7 +7,7 @@ const cx = bind(style);
 
 function MainInput() {
   const [todoItem, setTodoItem] = useState<string>('');
-  const addTodo = useStore((state) => state.addTodos);
+  const addTodo = useStore((state) => state.addTodo);
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTodoItem(event.target.value);
@@ -27,7 +27,6 @@ function MainInput() {
   return (
     <form onSubmit={handleEnterForm} className={cx(style.submitInput)}>
       <input
-        maxLength={15}
         value={todoItem}
         onChange={handleChangeInput}
         type="text"

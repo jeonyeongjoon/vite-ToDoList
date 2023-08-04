@@ -8,83 +8,47 @@ import SubInput from '../Input/SubInput';
 const cx = bind(style);
 
 function List() {
-  const [modifyState, setModifyState] = useState<boolean>(false);
+  const [isInModifyMode, setIsInModifyMode] = useState<boolean>(false);
 
-  const { filter } = useFilterStore();
-  const { todos, checkTodos, deleteTodos } = useStore();
+  const { togglefilter } = useFilterStore();
+  const { todos, toggleTodo, deleteTodo } = useStore();
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
 
-  const handleCheckTodo = (itemId: number) => {
-    checkTodos(itemId);
-  };
-
-  const handleDeleteTodo = (itemId: number) => {
-    deleteTodos(itemId);
-  };
+  const toggleFilterTodos = togglefilter
+    ? todos.filter((item) => item.check === true)
+    : todos;
 
   return (
     <div className={cx(style.List)}>
-      {filter
-        ? todos
-            .filter((item) => item.check === true)
-            .map((item) => (
-              <div key={item.key} className={cx(style.item)}>
-                <div
-                  className={cx(style.itemContent, {
-                    [style.true]: item.check,
-                  })}
-                >
-                  <div
-                    className={cx(style.check)}
-                    onClick={() => handleCheckTodo(item.key)}
-                  >
-                    <div className={cx(style.checkBox)} />
-                  </div>
-                  {modifyState && selectedItemId === item.key ? (
-                    <SubInput
-                      itemId={selectedItemId}
-                      setModifyState={setModifyState}
-                    />
-                  ) : (
-                    <p>{item.text}</p>
-                  )}
-                </div>
-                <DropDown
-                  onMenuClick={() => setSelectedItemId(item.key)}
-                  onDeleteFunction={() => handleDeleteTodo(item.key)}
-                  setModifyState={setModifyState}
-                />
-              </div>
-            ))
-        : todos.map((item) => (
-            <div key={item.key} className={cx(style.item)}>
-              <div
-                className={cx(style.itemContent, {
-                  [style.true]: item.check,
-                })}
-              >
-                <div
-                  className={cx(style.check)}
-                  onClick={() => handleCheckTodo(item.key)}
-                >
-                  <div className={cx(style.checkBox)} />
-                </div>
-                {modifyState && selectedItemId === item.key ? (
-                  <SubInput
-                    itemId={selectedItemId}
-                    setModifyState={setModifyState}
-                  />
-                ) : (
-                  <p>{item.text}</p>
-                )}
-              </div>
-              <DropDown
-                onMenuClick={() => setSelectedItemId(item.key)}
-                onDeleteFunction={() => handleDeleteTodo(item.key)}
-                setModifyState={setModifyState}
-              />
+      {toggleFilterTodos.map((item) => (
+        <div key={item.itemId} className={cx(style.item)}>
+          <div
+            className={cx(style.itemContent, {
+              [style.true]: item.check,
+            })}
+          >
+            <div
+              className={cx(style.check)}
+              onClick={() => toggleTodo(item.itemId)}
+            >
+              <div className={cx(style.checkBox)} />
             </div>
-          ))}
+            {isInModifyMode && selectedItemId === item.itemId ? (
+              <SubInput
+                itemId={selectedItemId}
+                setModifyState={setIsInModifyMode}
+              />
+            ) : (
+              <p>{item.text}</p>
+            )}
+          </div>
+          <DropDown
+            onMenuClick={() => setSelectedItemId(item.itemId)}
+            onDeleteTodoItem={() => deleteTodo(item.itemId)}
+            setIsInModifyMode={setIsInModifyMode}
+          />
+        </div>
+      ))}
     </div>
   );
 }
