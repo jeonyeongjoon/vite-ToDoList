@@ -9,7 +9,6 @@ const cx = bind(style);
 
 function List() {
   const [isInModifyMode, setIsInModifyMode] = useState<boolean>(false);
-
   const { togglefilter } = useFilterStore();
   const { todos, toggleTodo, deleteTodo } = useStore();
   const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
