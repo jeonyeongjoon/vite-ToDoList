@@ -63,7 +63,7 @@ export const useFilterStore = create<ToggleFilterState>((set) => ({
   selectToggleFilter: () => {
     set((state) => ({
       ...state,
-      filter: !state.togglefilter,
+      togglefilter: !state.togglefilter,
     }));
   },
 }));
